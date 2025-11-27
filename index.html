@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>스타벅스 좌석 현황 데모</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="phone-frame">
+    <div class="phone-notch"></div>
+
+    <!-- 메인 화면만 사용 (스플래시 제거) -->
+    <div id="mainScreen" class="screen">
+      <div class="home-scroll">
+        <div class="home-greeting">
+          한성부기님,<br />
+          쿠폰 사용 기간이<br />
+          얼마 남지 않았네요!
+        </div>
+
+        <div class="home-chip-row">
+          <div class="home-chip primary">
+            <span class="chip-badge">NEW</span>
+            <span>Green 0</span>
+          </div>
+          <div class="home-chip">Coupon</div>
+          <div class="home-chip">Pay</div>
+        </div>
+
+        <div class="promo-card">
+          <div class="promo-title">2025 WINTER e-FREQUENCY</div>
+          <div class="promo-sub">
+            행사 기간 10/30(목) ~ 12/31(수)<br />
+            참여 매장 및 재고는 매장별로 상이할 수 있어요.
+          </div>
+        </div>
+
+        <div class="reward-card">
+          <div class="reward-title">STARBUCKS REWARDS</div>
+          <div>
+            더욱 간편하게 별★쿠폰 자동 발행 받고<br />
+            추가 리워드까지 받아보세요.
+          </div>
+        </div>
+
+        <div class="big-banner">
+          Delivers 로 따뜻하게
+        </div>
+      </div>
+
+      <!-- 하단 네비게이션 (항상 맨 아래) -->
+      <div class="bottom-nav">
+        <button class="nav-item active">
+          <div class="nav-icon"></div>
+          <span>Home</span>
+        </button>
+        <button class="nav-item">
+          <div class="nav-icon"></div>
+          <span>Pay</span>
+        </button>
+        <button class="nav-item" id="navOrder">
+          <div class="nav-icon"></div>
+          <span>Order</span>
+        </button>
+        <button class="nav-item">
+          <div class="nav-icon"></div>
+          <span>Shop</span>
+        </button>
+        <button class="nav-item">
+          <div class="nav-icon"></div>
+          <span>Other</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 매장 설정 / 상세 / 좌석 현황 모달 -->
+    <div id="storeModal" class="modal-overlay">
+      <div class="modal-sheet">
+        <div class="modal-handle"></div>
+
+        <!-- 매장 목록 -->
+        <div class="modal-page active" data-page="list">
+          <div class="modal-header">
+            <div class="modal-title">매장 설정</div>
+            <button class="icon-btn-right" type="button">☰</button>
+          </div>
+          <div class="store-list-wrap">
+            <div class="search-box">매장 검색</div>
+            <div class="segmented">
+              <span class="active">가까운 매장</span>
+              <span class="divider">|</span>
+              <span>자주 가는 매장</span>
+            </div>
+
+            <!-- 매장 1 -->
+            <button class="store-item" data-store-id="dongsoong-art">
+              <div class="store-thumb">
+                동숭로아트<br />이미지
+              </div>
+              <div class="store-text">
+                <div>
+                  <div class="store-name">동숭로아트</div>
+                  <div class="store-addr">
+                    서울특별시 종로구 동숭길 110 (동숭동)
+                  </div>
+                </div>
+                <div class="store-distance">596m</div>
+              </div>
+            </button>
+
+            <!-- 매장 2 -->
+            <button class="store-item" data-store-id="maronie">
+              <div class="store-thumb">
+                마로니에<br />공원점
+              </div>
+              <div class="store-text">
+                <div>
+                  <div class="store-name">마로니에공원</div>
+                  <div class="store-addr">
+                    서울특별시 종로구 대학로 116, 1~2층 (동숭동)
+                  </div>
+                </div>
+                <div class="store-distance">711m</div>
+              </div>
+            </button>
+
+            <!-- 매장 3 -->
+            <button class="store-item" data-store-id="hyehwa">
+              <div class="store-thumb">
+                혜화역점<br />이미지
+              </div>
+              <div class="store-text">
+                <div>
+                  <div class="store-name">혜화역</div>
+                  <div class="store-addr">
+                    서울특별시 종로구 대학로 12길 4 (동숭동) 1~2층
+                  </div>
+                </div>
+                <div class="store-distance">729m</div>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <!-- 매장 상세 -->
+        <div class="modal-page" data-page="detail">
+          <div class="modal-header">
+            <button class="icon-btn" type="button" id="detailBackBtn">‹</button>
+            <div class="modal-title selected-store-name">
+              동숭로아트
+            </div>
+            <button class="icon-btn-right" type="button">☰</button>
+          </div>
+
+          <div class="store-detail-wrap">
+            <div class="store-detail-img">
+              선택한 매장 사진 (샘플)
+            </div>
+
+            <div class="store-detail-main">
+              <div>
+                <div class="store-detail-title selected-store-name">
+                  동숭로아트
+                </div>
+                <div class="store-detail-addr selected-store-addr">
+                  서울특별시 종로구 동숭길 110 (동숭동)
+                </div>
+              </div>
+              <div class="chevron-right">›</div>
+            </div>
+
+            <div class="info-row">
+              <div class="info-left">
+                <div class="info-icon">🕒</div>
+                <div>
+                  <div>사이렌 오더 운영 시간</div>
+                  <div class="info-time">카페 08:00 ~ 21:30</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 매장 좌석 현황 버튼 -->
+            <div class="seat-row" id="openSeatPage">
+              <span>매장 좌석 현황</span>
+              <span class="chevron-right">›</span>
+            </div>
+
+            <div class="store-desc">
+              수령 장소에 따라 메뉴별 주문 가능 수량이 다를 수 있어요.
+            </div>
+
+            <div class="pickup-title">픽업은 어떻게 하시겠어요?</div>
+            <div class="pickup-btn-row">
+              <button class="pickup-btn main" type="button">
+                <strong>매장 이용</strong>
+                <span>매장에서 먹을게요</span>
+              </button>
+              <button class="pickup-btn" type="button">
+                <strong>To-go</strong>
+                <span>밖으로 가져갈게요</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 좌석 현황 페이지 -->
+        <div class="modal-page" data-page="seat">
+          <div class="modal-header">
+            <button class="icon-btn" type="button" id="seatBackBtn">‹</button>
+            <div class="modal-title">매장 좌석 현황</div>
+          </div>
+
+          <div class="seat-wrap">
+            <div class="seat-map">
+              <div class="seat-map-title">
+                <span class="selected-store-name">동숭로아트</span> 1층 좌석
+              </div>
+
+              <div class="seat-grid" id="seatGrid"></div>
+
+              <div class="seat-legend">
+                <span><span class="legend-dot legend-free"></span>여유 좌석</span>
+                <span><span class="legend-dot legend-busy"></span>혼잡 좌석</span>
+                <span><span class="legend-dot legend-empty"></span>테이블/통로</span>
+              </div>
+            </div>
+
+            <div class="seat-caption">
+              실시간 매장 좌석을 반영하는 데 다소 시간이 걸릴 수 있어요.
+            </div>
+
+            <div class="seat-question">마음에 드는 자리가 없나요?</div>
+            <div class="floor-btn-row">
+              <button class="floor-btn selected" type="button" data-floor="1">
+                <strong>1층</strong>
+                <span>다른 층이 궁금해요</span>
+              </button>
+              <button class="floor-btn" type="button" data-floor="3">
+                <strong>3층</strong>
+                <span>다른 층이 궁금해요</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
