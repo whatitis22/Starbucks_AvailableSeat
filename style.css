@@ -133,7 +133,7 @@ body {
   margin-bottom: 24px;
 }
 
-/* 하단 탭바: flex의 마지막 요소라 자동으로 맨 아래 */
+/* 하단 탭바 */
 .bottom-nav {
   height: 70px;
   border-top: 1px solid #e5e5e5;
@@ -451,30 +451,26 @@ body {
 }
 .seat-map-title {
   font-size: 13px;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   font-weight: 600;
 }
-.seat-grid {
-  display: grid;
-  grid-template-columns: repeat(10, 1fr);
-  gap: 2px;
+
+/* 좌석 이미지 */
+.seat-image-wrap {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #ddd;
+  display: block;          /* flex 대신 block으로 */
   margin-bottom: 10px;
 }
-.seat-cell {
-  width: 10px;
-  height: 10px;
-  border-radius: 2px;
-  background: #e0e0e0;
+/* 이미지 비율 유지 + 짤리지 않게 */
+.seat-image {
+  width: 100%;
+  height: auto;            /* 고정 높이 제거 → 원본 비율 유지 */
+  display: block;
 }
-.seat-cell.free {
-  background: #40b765;
-}
-.seat-cell.busy {
-  background: #ff8a3c;
-}
-.seat-cell.none {
-  background: transparent;
-}
+
 .seat-legend {
   display: flex;
   gap: 12px;
@@ -509,6 +505,8 @@ body {
   font-weight: 600;
   margin-bottom: 8px;
 }
+
+/* 층 버튼 */
 .floor-btn-row {
   display: flex;
   gap: 10px;
@@ -527,8 +525,33 @@ body {
   display: block;
   margin-bottom: 4px;
 }
-.floor-btn.selected {
-  border-color: #00704a;
-  color: #00704a;
-  font-weight: 600;
+.floor-btn.disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+/* 아이콘 + 빨간 점 래퍼 */
+.nav-icon-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Order 클릭 유도용 빨간 점 */
+.nav-dot {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #e53935;      /* 빨간색 점 */
+}
+
+/* 매장 좌석 현황 라벨 + 빨간 점 래퍼 */
+.seat-label-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
 }

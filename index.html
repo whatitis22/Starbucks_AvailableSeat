@@ -10,11 +10,11 @@
   <div class="phone-frame">
     <div class="phone-notch"></div>
 
-    <!-- 메인 화면만 사용 (스플래시 제거) -->
+    <!-- 메인 화면 -->
     <div id="mainScreen" class="screen">
       <div class="home-scroll">
         <div class="home-greeting">
-          한성부기님,<br />
+          김가람님,<br />
           쿠폰 사용 기간이<br />
           얼마 남지 않았네요!
         </div>
@@ -49,7 +49,7 @@
         </div>
       </div>
 
-      <!-- 하단 네비게이션 (항상 맨 아래) -->
+      <!-- 하단 네비게이션 -->
       <div class="bottom-nav">
         <button class="nav-item active">
           <div class="nav-icon"></div>
@@ -59,9 +59,13 @@
           <div class="nav-icon"></div>
           <span>Pay</span>
         </button>
-        <button class="nav-item" id="navOrder">
-          <div class="nav-icon"></div>
-          <span>Order</span>
+          <button class="nav-item" id="navOrder">
+            <div class="nav-icon-wrap">
+              <div class="nav-icon"></div>
+              <!-- 클릭 유도용 빨간 점 -->
+              <span class="nav-dot"></span>
+            </div>
+            <span>Order</span>
         </button>
         <button class="nav-item">
           <div class="nav-icon"></div>
@@ -93,7 +97,7 @@
               <span>자주 가는 매장</span>
             </div>
 
-            <!-- 매장 1 -->
+            <!-- 매장 1: 단층 -->
             <button class="store-item" data-store-id="dongsoong-art">
               <div class="store-thumb">
                 동숭로아트<br />이미지
@@ -109,7 +113,7 @@
               </div>
             </button>
 
-            <!-- 매장 2 -->
+            <!-- 매장 2: 복층 -->
             <button class="store-item" data-store-id="maronie">
               <div class="store-thumb">
                 마로니에<br />공원점
@@ -125,7 +129,7 @@
               </div>
             </button>
 
-            <!-- 매장 3 -->
+            <!-- 매장 3: 복층 -->
             <button class="store-item" data-store-id="hyehwa">
               <div class="store-thumb">
                 혜화역점<br />이미지
@@ -180,11 +184,16 @@
               </div>
             </div>
 
-            <!-- 매장 좌석 현황 버튼 -->
+            <!-- 매장 좌석 현황 버튼 + 빨간 점 -->
             <div class="seat-row" id="openSeatPage">
-              <span>매장 좌석 현황</span>
+              <div class="seat-label-wrap">
+                <span>매장 좌석 현황</span>
+                <!-- 클릭 유도용 빨간 점 (Order와 동일 스타일 재사용) -->
+                <span class="nav-dot seat-dot"></span>
+              </div>
               <span class="chevron-right">›</span>
             </div>
+
 
             <div class="store-desc">
               수령 장소에 따라 메뉴별 주문 가능 수량이 다를 수 있어요.
@@ -214,11 +223,21 @@
           <div class="seat-wrap">
             <div class="seat-map">
               <div class="seat-map-title">
-                <span class="selected-store-name">동숭로아트</span> 1층 좌석
+                <span class="selected-store-name">동숭로아트</span>
+                <span class="seat-floor-label">1층</span> 좌석
               </div>
 
-              <div class="seat-grid" id="seatGrid"></div>
+              <!-- 좌석 이미지 (모든 매장/층 공통) -->
+              <div class="seat-image-wrap">
+                <!-- seat-sample.jpg 파일을 같은 폴더에 두세요 -->
+                <img
+                  src="seat-sample.jpg"
+                  alt="매장 좌석 이미지"
+                  class="seat-image"
+                />
+              </div>
 
+              <!-- 설명 텍스트는 유지 -->
               <div class="seat-legend">
                 <span><span class="legend-dot legend-free"></span>여유 좌석</span>
                 <span><span class="legend-dot legend-busy"></span>혼잡 좌석</span>
@@ -231,18 +250,21 @@
             </div>
 
             <div class="seat-question">마음에 드는 자리가 없나요?</div>
-            <div class="floor-btn-row">
-              <button class="floor-btn selected" type="button" data-floor="1">
-                <strong>1층</strong>
-                <span>다른 층이 궁금해요</span>
+
+            <!-- 층 전환 버튼: 단층 매장은 JS에서 숨김 -->
+            <div class="floor-btn-row" id="floorBtnRow">
+              <button class="floor-btn" type="button" id="floorBtnLeft">
+                <strong>현재 최하층이에요.</strong>
+                <span></span>
               </button>
-              <button class="floor-btn" type="button" data-floor="3">
-                <strong>3층</strong>
-                <span>다른 층이 궁금해요</span>
+              <button class="floor-btn" type="button" id="floorBtnRight">
+                <strong>다른 층이 궁금해요 2층</strong>
+                <span></span>
               </button>
             </div>
           </div>
         </div>
+
       </div>
     </div>
   </div>
